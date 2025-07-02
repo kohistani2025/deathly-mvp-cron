@@ -1,18 +1,18 @@
 name: Deathly Check Cron
 
 on:
-  workflow_dispatch:   # allows manual run button
+  workflow_dispatch:
   schedule:
-    - cron: "*/5 * * * *"  # runs every 5 minutes
+    - cron: "*/5 * * * *"
 
 jobs:
   call-edge:
     runs-on: ubuntu-latest
     steps:
       - name: Call Supabase Edge Function
-  run: |
-    curl -X POST \
-      -H "Authorization: Bearer ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}" \
-      -H "Content-Type: application/json" \
-      -d '{}' \
-      ${{ secrets.SUPABASE_EDGE_URL }}
+        run: |
+          curl -X POST \
+          -H "Authorization: Bearer ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}" \
+          -H "Content-Type: application/json" \
+          -d '{"trigger":"cron"}' \
+          ${{ secrets.SUPABASE_EDGE_URL }}
