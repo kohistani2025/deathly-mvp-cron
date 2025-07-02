@@ -1,9 +1,9 @@
 name: Deathly Check Cron
 
 on:
-  workflow_dispatch:
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "* * * * *"   # every 1 minute
+  workflow_dispatch:      # allows manual triggering
 
 jobs:
   call-edge:
@@ -12,7 +12,6 @@ jobs:
       - name: Call Supabase Edge Function
         run: |
           curl -X POST \
-          -H "Authorization: Bearer ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}" \
-          -H "Content-Type: application/json" \
-          -d '{"trigger":"cron"}' \
-          ${{ secrets.SUPABASE_EDGE_URL }}
+            -H "Authorization: Bearer ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}" \
+            -H "Content-Type: application/json" \
+            ${{ secrets.SUPABASE_EDGE_URL }}
