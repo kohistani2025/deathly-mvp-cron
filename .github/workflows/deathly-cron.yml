@@ -13,4 +13,6 @@ jobs:
         run: |
           curl -X POST \
           -H "Authorization: Bearer ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}" \
+          -H "Content-Type: application/json" \
+          -d '{"trigger":"cron"}' \
           ${{ secrets.SUPABASE_EDGE_URL }}
