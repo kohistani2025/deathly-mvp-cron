@@ -10,9 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Call Supabase Edge Function
-        run: |
-          curl -X POST \
-          -H "Authorization: Bearer ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}" \
-          -H "Content-Type: application/json" \
-          -d '{"messageId":"44444444-4444-4444-4444-444444444444","testMode":true}' \
-          ${{ secrets.SUPABASE_EDGE_URL }}
+  run: |
+    curl -X POST \
+      -H "Authorization: Bearer ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}" \
+      -H "Content-Type: application/json" \
+      -d '{}' \
+      ${{ secrets.SUPABASE_EDGE_URL }}
