@@ -6,10 +6,15 @@ on:
   workflow_dispatch:      # allows manual triggering
 
 jobs:
-  call-edge:
+  call-scheduled:
     runs-on: ubuntu-latest
     steps:
-      - name: Call Supabase Edge Function
+      - name: Activate scheduled messages
+        run: |
+          sudo apt-get update && sudo apt-get install -y postgresql-client
+          psql "${{ secrets.SUPABASE_DB_URL }}" -c "select activate_scheduled_messages();"
+
+      - name: Call Supabase Edge Function to send messages
         run: |
           curl -X POST \
             -H "Authorization: Bearer ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}" \
